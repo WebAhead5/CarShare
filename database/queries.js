@@ -13,8 +13,7 @@ function getAllCars(cb) {
 
 
 function getAvailableCars(fromDate, toDate, cb) {
-    database.query(`select * from reservations inner join cars on cars.id = reservations.carid where reservations.fromdate Not between date '${fromDate}' AND date '${toDate}' OR reservations.to
-date Not between date '${fromDate}' AND date '${toDate}')`, (err, res) => {
+    database.query(`select * from reservations inner join cars on cars.id=reservations.carid where 'reservations.todate < ${fromDate}' OR reservations.fromdate< '${toDate}' `, (err, res) => {
         if (err) cb(err)
         else cb(null, res.rows);
     })
@@ -48,7 +47,7 @@ function postUserCar(make, model, year, color, seatsnumber, rate, image) {
 }
 function postReservation(userid, carid, fromdate, todate) {
     database.query(`insert into reservations (userid, carid, fromdate, todate) values (${userid}, ${carid}, ${fromdate},${todate}`)
-
+q
 
 }
 

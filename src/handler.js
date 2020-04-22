@@ -121,6 +121,11 @@ const addCarHandler = response => {
 
 
 const postReservationHandler = (request, response) => {
+    var userid = getParamsFromRequest(request).userid;
+    var carid = getParamsFromRequest(request).carid;
+    var fromdate = getParamsFromRequest(request).fromdate;
+    var carid = getParamsFromRequest(request).todate;
+
 
     //need to get variables from front end
 
@@ -130,6 +135,11 @@ const postReservationHandler = (request, response) => {
 
 
 const postUserCarHandler = (request, response) => {
+
+    var make = getParamsFromRequest(request).make;
+    var carid = getParamsFromRequest(request).carid;
+    var fromdate = getParamsFromRequest(request).fromdate;
+    var carid = getParamsFromRequest(request).todate;
 
     //need to get varibles from front end
 
