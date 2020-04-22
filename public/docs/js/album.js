@@ -53,9 +53,16 @@ const giveResults = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 var data = JSON.parse(xhr.responseText);
+                console.log(data);
                 const cars_row = document.getElementById("cars_row");
                 for (let i = 0; i < cars_row.children.length; i++) {
-                   cars_row.children[i].getElementsByTagName('text')[0].innerHTML = data[i].make;
+                   cars_row.children[i].getElementsByTagName('text')[0].innerHTML = data[i].make;         
+                   cars_row.children[i].getElementsByTagName('button')[0]
+                   .addEventListener('click',()=>{
+                    selectedCarId =data[i].id;
+                    console.log(selectedCarId);
+                   });
+
                 }
             }
             else {
