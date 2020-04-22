@@ -19,7 +19,7 @@ date Not between date '${fromDate}' AND date '${toDate}')`, (err, res) => {
 
 //Check if password is correct and return user data
 function checkPassword(UserName, Password, cb) {
-    database.query(`select * from users where firstname='${UserName}' AND password='${Password}'`, (err, res) => {
+    database.query(`select * from users where email='${UserName}' AND password='${Password}'`, (err, res) => {
         if (err) cb(err)
         else cb(null, res.rows);
     })
