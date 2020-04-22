@@ -35,7 +35,7 @@ const router = (request, response) => {
   else if (Url.includes('/postRes') && request.method === 'POST') {
     postReservationHandler(request, response);
   }//GET REQ
-  else if (Url.include('/getAvailableCars')) {
+  else if (Url.includes('/getAvailableCars')) {
     getAvailableCarsHandler(request, response);
   }//ERROR
   else {

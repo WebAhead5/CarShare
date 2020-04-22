@@ -113,6 +113,7 @@ const getAvailableCarsHandler = (request, response) => {
 
     var todate = getParamsFromRequest(request).todate
     var fromdate = getParamsFromRequest(request).fromdate
+    console.log(todate, fromdate)
 
     getAvailableCars(todate, fromdate, (err, result) => {
         if (err) {
@@ -180,14 +181,14 @@ const postUserCarHandler = (request, response) => {
         var model = convertedData.model
         var year = convertedData.year
         var color = convertedData.color
-        var seatnumber = convertedData.seatnuber
+        var seatsnumber = convertedData.seatsnumber
         var rate = convertedData.rate
         var image = convertedData.image
 
         //Issues with a-sync?
-        postUserCar(make, model, year, color, seatnumber, rate, image)
+        postUserCar(make, model, year, color, seatsnumber, rate, image)
 
-        response.writeHead(303, { "Location": "/addCar" }) //send back to start
+        response.writeHead(303, { "Location": "/" }) //send back to start
         response.end();
 
     })
