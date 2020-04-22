@@ -1,5 +1,5 @@
 const { LoginHandler,
-UserHandler,showCarHandler,addCarHandler,PublicHandler,errorHandler, getCarHandler}=require('./handler.js')
+UserHandler,showCarHandler,addCarHandler,PublicHandler,errorHandler, getCarHandler, getUserHandler, passHandler, postReservationHandler, postUserCarHandler, getAvailableCarsHandler}=require('./handler.js')
 
 const router=(request,response)=>{
 
@@ -32,6 +32,36 @@ const router=(request,response)=>{
         
       getCarHandler(response);
 
+    }
+    else if (Url === '/getUser')
+    {
+        
+      getUserHandler(response);
+
+    }
+    else if (Url === '/passCheck')
+    {
+    
+    passHandler(response);
+
+    }
+    else if (Url === '/postCar')
+    {
+    
+    postUserCarHandler(response);
+
+    }
+    else if (Url === '/postRes')
+    {
+    
+    postReservationHandler(response);
+
+    }
+    else if (Url === '/getAvailableCars')
+    {
+    
+    getAvailableCarsHandler(response);
+        
     }
     else 
     {
