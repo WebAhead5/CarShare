@@ -1,6 +1,8 @@
 const { readFile } = require('fs');
 const path = require('path');
-const {getAllCars}=require('../database/queries.js')
+const { getAllCars, getUser, checkPassword, postReservation, postUserCar, getAvailableCars } = require('../database/queries.js')
+const url = require('url')
+const querystring = require('querystring')
 
 
 
@@ -31,21 +33,76 @@ const showCarHandler = response => {
         response.end(file);
     });
 
-   
-
 };
 
+const passHandler = (request, response) => {   //need to get varibles from front end
+    // var username = 'Cassaundra'
+    // var password = 'BiwNM5eVU'
 
+    console.log("REQ URL:", getParamsFromRequest(request))
+
+
+    var username = getParamsFromRequest(request).name
+    var password = getParamsFromRequest(request).password
+
+    if (checkPassword(username, password, (err, result) => {
+        if (err) {
+
+            response.end('sorry there is an error');
+        }
+        else {
+            response.writeHead(200, { 'Content-Type': 'application/json' });
+            response.end((JSON.stringify(result)));
+        }
+    }));
+
+}
 
 const getCarHandler = response => {
 
-    getAllCars( (err, result) => {
-         if(err){
-             
-         response.end('sorry there is an error');}
-         else {
-         response.writeHead(200, { 'Content-Type': 'application/json' });
-         response.end((JSON.stringify(result)));}
+    getAllCars((err, result) => {
+        if (err) {
+
+            response.end('sorry there is an error');
+        }
+        else {
+            response.writeHead(200, { 'Content-Type': 'application/json' });
+            response.end((JSON.stringify(result)));
+        }
+    })
+
+
+}
+
+function getParamsFromRequest(request) {
+    let search = url.parse(request.url).query;
+
+    return querystring.parse(search);
+}
+
+
+
+const getUserHandler = (request, response) => {
+    // console.log("TEST1", request)
+
+
+    console.log("REQ URL:", getParamsFromRequest(request))
+
+
+    var name = getParamsFromRequest(request).name
+
+
+    console.log("NAME:", name)
+
+    getUser(name, (err, result) => {
+        if (err) {
+
+            response.end('sorry there is an error');
+        }
+        else {
+            response.writeHead(200, { 'Content-Type': 'application/json' });
+            response.end((JSON.stringify(result)));
+        }
     })
 
 
@@ -60,6 +117,44 @@ const addCarHandler = response => {
         response.end(file);
     });
 };
+
+
+
+const postReservationHandler = (request, response) => {
+
+    //need to get variables from front end
+
+    postReservation(userid, carid, fromdate, todate)
+
+}
+
+
+const postUserCarHandler = (request, response) => {
+
+    //need to get varibles from front end
+
+    postUserCar(make, model, year, color, seatsnumber, rate, image)
+
+
+}
+
+
+const getAvailableCarsHandler = (request, response) => {
+    var fromdate = '2020-08-01'
+    var todate = '2020-10-01'
+
+    getAvailableCars((err, result) => {
+        if (err) {
+
+            response.end('sorry there is an error');
+        }
+        else {
+            response.writeHead(200, { 'Content-Type': 'application/json' });
+            response.end((JSON.stringify(result)));
+        }
+    })
+}
+
 
 
 const PublicHandler = (url, response) => {
@@ -94,5 +189,5 @@ const errorHandler = (response) => {
 
 module.exports = {
     LoginHandler,
-    UserHandler, showCarHandler, addCarHandler, PublicHandler, errorHandler, getCarHandler
+    UserHandler, showCarHandler, addCarHandler, PublicHandler, errorHandler, getCarHandler, getUserHandler, passHandler, getAvailableCarsHandler, postReservationHandler, postUserCarHandler
 }
