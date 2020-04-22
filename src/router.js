@@ -4,6 +4,7 @@ UserHandler,showCarHandler,addCarHandler,PublicHandler,errorHandler, getCarHandl
 const router=(request,response)=>{
 
     var Url=request.url;
+    console.log(Url);
     if(Url==='/')
     {
         LoginHandler(response);

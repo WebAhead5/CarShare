@@ -5,7 +5,7 @@ const {getAllCars}=require('../database/queries.js')
 
 
 const LoginHandler = response => {
-    const filepath = path.join(__dirname, '..', 'public', 'index.html');
+    const filepath = path.join(__dirname, '..', 'index.html');
     readFile(filepath, (err, file) => {
         if (err) return serverError(err, response);
         response.writeHead(200, { 'Content-Type': 'text/html' });
@@ -24,7 +24,7 @@ const UserHandler = response => {
 
 const showCarHandler = response => {
 
-    const filepath = path.join(__dirname, '..', 'public', 'ShowCar.html');
+    const filepath = path.join(__dirname, '..', 'public', 'album.html');
     readFile(filepath, (err, file) => {
         if (err) return serverError(err, response);
         response.writeHead(200, { 'Content-Type': 'text/html' });
@@ -66,12 +66,15 @@ const PublicHandler = (url, response) => {
     const filepath = path.join(__dirname, '..', url);
     readFile(filepath, (err, file) => {
         if (err) return serverError(err, response);
-        const [, extension] = url.split('.');
+        const extension = url.split('.')[1];
+        console.log(extension);
         const extensionType = {
             html: 'text/html',
             css: 'text/css',
             js: 'application/javascript',
-            ico: 'image/x-icon'
+            ico: 'image/x-icon',
+            svg: 'image/svg+xml',
+            json: 'application/json'
         };
         response.writeHead(200, { 'content-type': extensionType[extension] });
         response.end(file);
