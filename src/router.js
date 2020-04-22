@@ -29,7 +29,7 @@ const router = (request, response) => {
   else if (Url.includes('/passCheck')) {
     passHandler(request, response);
   }//POST REQ
-  else if (Url.include('/postCar') && request.method === 'POST') {
+  else if (Url.includes('/postCar') && request.method === 'POST') {
     postUserCarHandler(request, response);
   }//POST REQ
   else if (Url.includes('/postRes') && request.method === 'POST') {

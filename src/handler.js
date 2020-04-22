@@ -136,23 +136,25 @@ const getAvailableCarsHandler = (request, response) => {
 const postReservationHandler = (request, response) => {
 
     var allTheData = '';
-    req.on('data', function (chunkOfData) {
+    request.on('data', function (chunkOfData) {
 
         allTheData += chunkOfData;
     });
     var convertedData = querystring.parse(allTheData);
-    res.writeHead(303, { "Location": "/getCar" }) //send back to getCar page
+
 
     var userid = convertedData.userid
     var carid = convertedData.carid
     var fromdate = convertedData.fromdate
     var todate = convertedData.todate
+    console.log(userid, carid, fromdate, todate)
 
+    //Issues with a-sync?
     postReservation(userid, carid, fromdate, todate)
 
-    if (err) return serverError(err, response);
-    response.writeHead(200, { 'Content-Type': 'text/plain' });
-    response.end("Reservation Added OK")
+    // if (err) return serverError(err, response);
+    // response.writeHead(303, { "Location": "/getCar" }) //send back to getCar page
+
 
 }
 
@@ -160,12 +162,11 @@ const postReservationHandler = (request, response) => {
 const postUserCarHandler = (request, response) => {
 
     var allTheData = '';
-    req.on('data', function (chunkOfData) {
+    request.on('data', function (chunkOfData) {
 
         allTheData += chunkOfData;
     });
     var convertedData = querystring.parse(allTheData);
-    res.writeHead(303, { "Location": "/addCar" }) //send back to add car page
 
     var make = convertedData.make
     var model = convertedData.model
@@ -175,12 +176,11 @@ const postUserCarHandler = (request, response) => {
     var rate = convertedData.rate
     var image = convertedData.image
 
-
+    //Issues with a-sync?
     postUserCar(make, model, year, color, seatnumber, rate, image)
 
-    if (err) return serverError(err, response);
-    response.writeHead(200, { 'Content-Type': 'text/plain' });
-    response.end("Car Added OK")
+    // if (err) return serverError(err, response);
+    response.writeHead(303, { "Location": "/getCar" }) //send back to add Car page
 }
 
 

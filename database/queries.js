@@ -36,12 +36,12 @@ function getUser(UserName, cb) {
 
 //Insert new car to database
 function postUserCar(make, model, year, color, seatsnumber, rate, image) {
-    database.query(`insert into cars (make, model, year, color, seatsnumber, rate, image) values (${make}, ${model}, ${year},${color},${seatsnumber},${rate}, ${image}`)
+    database.query(`insert into cars (make, model, year, color, seatsnumber, rate, image) values ('${make}', '${model}', '${year}','${color}',${seatsnumber},${rate}, '${image}')`)
 }
 
 //Insert new reservation to database
 function postReservation(userid, carid, fromdate, todate) {
-    database.query(`insert into reservations (userid, carid, fromdate, todate) values (${userid}, ${carid}, ${fromdate},${todate}`)
+    database.query(`insert into reservations (userid, carid, fromdate, todate) values (${userid}, ${carid}, '${fromdate}','${todate}')`)
 }
 
 
