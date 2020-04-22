@@ -1,6 +1,8 @@
 const { readFile } = require('fs');
 const path = require('path');
-const {getAllCars, getUser,checkPassword, postReservation, postUserCar, getAvailableCars}=require('../database/queries.js')
+const { getAllCars, getUser, checkPassword, postReservation, postUserCar, getAvailableCars } = require('../database/queries.js')
+const url = require('url')
+const querystring = require('querystring')
 
 
 
@@ -33,44 +35,74 @@ const showCarHandler = response => {
 
 };
 
-const passHandler = response =>
-{   //need to get varibles from front end
-    var username = 'Cassaundra'
-    var password = 'BiwNM5eVU'
-    if(checkPassword(username, password, (err, result) => {
-        if(err){
-            
-        response.end('sorry there is an error');}
+const passHandler = (request, response) => {   //need to get varibles from front end
+    // var username = 'Cassaundra'
+    // var password = 'BiwNM5eVU'
+
+    console.log("REQ URL:", getParamsFromRequest(request))
+
+
+    var username = getParamsFromRequest(request).name
+    var password = getParamsFromRequest(request).password
+
+    if (checkPassword(username, password, (err, result) => {
+        if (err) {
+
+            response.end('sorry there is an error');
+        }
         else {
-        response.writeHead(200, { 'Content-Type': 'application/json' });
-        response.end((JSON.stringify(result)));}
+            response.writeHead(200, { 'Content-Type': 'application/json' });
+            response.end((JSON.stringify(result)));
+        }
     }));
 
 }
 
 const getCarHandler = response => {
 
-    getAllCars( (err, result) => {
-         if(err){
-             
-         response.end('sorry there is an error');}
-         else {
-         response.writeHead(200, { 'Content-Type': 'application/json' });
-         response.end((JSON.stringify(result)));}
+    getAllCars((err, result) => {
+        if (err) {
+
+            response.end('sorry there is an error');
+        }
+        else {
+            response.writeHead(200, { 'Content-Type': 'application/json' });
+            response.end((JSON.stringify(result)));
+        }
     })
 
 
 }
 
-const getUserHandler = response => {
-    var name = 'Lelia' // temp until front end provides name then extract from Q string
-    getUser( name, (err, result) => {
-         if(err){
-             
-         response.end('sorry there is an error');}
-         else {
-         response.writeHead(200, { 'Content-Type': 'application/json' });
-         response.end((JSON.stringify(result)));}
+function getParamsFromRequest(request) {
+    let search = url.parse(request.url).query;
+
+    return querystring.parse(search);
+}
+
+
+
+const getUserHandler = (request, response) => {
+    // console.log("TEST1", request)
+
+
+    console.log("REQ URL:", getParamsFromRequest(request))
+
+
+    var name = getParamsFromRequest(request).name
+
+
+    console.log("NAME:", name)
+
+    getUser(name, (err, result) => {
+        if (err) {
+
+            response.end('sorry there is an error');
+        }
+        else {
+            response.writeHead(200, { 'Content-Type': 'application/json' });
+            response.end((JSON.stringify(result)));
+        }
     })
 
 
@@ -88,7 +120,7 @@ const addCarHandler = response => {
 
 
 
-const postReservationHandler = response => {
+const postReservationHandler = (request, response) => {
 
     //need to get variables from front end
 
@@ -97,7 +129,7 @@ const postReservationHandler = response => {
 }
 
 
-const postUserCarHandler = response => {
+const postUserCarHandler = (request, response) => {
 
     //need to get varibles from front end
 
@@ -107,17 +139,19 @@ const postUserCarHandler = response => {
 }
 
 
-const getAvailableCarsHandler =response => {
+const getAvailableCarsHandler = (request, response) => {
     var fromdate = '2020-08-01'
     var todate = '2020-10-01'
 
-    getAvailableCars( (err, result) => {
-         if(err){
-             
-         response.end('sorry there is an error');}
-         else {
-         response.writeHead(200, { 'Content-Type': 'application/json' });
-         response.end((JSON.stringify(result)));}
+    getAvailableCars((err, result) => {
+        if (err) {
+
+            response.end('sorry there is an error');
+        }
+        else {
+            response.writeHead(200, { 'Content-Type': 'application/json' });
+            response.end((JSON.stringify(result)));
+        }
     })
 }
 
