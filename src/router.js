@@ -1,5 +1,5 @@
 const { LoginHandler,
-UserHandler,showCarHandler,addCarHandler,PublicHandler,errorHandler}=require('./handler.js')
+UserHandler,showCarHandler,addCarHandler,PublicHandler,errorHandler, getCarHandler}=require('./handler.js')
 
 const router=(request,response)=>{
 
@@ -25,6 +25,12 @@ const router=(request,response)=>{
     else if(Url.includes('public'))
     {
       PublicHandler(Url,response);
+
+    }
+    else if (Url === '/getCar')
+    {
+        
+      getCarHandler(response);
 
     }
     else 

@@ -1,5 +1,6 @@
 const { readFile } = require('fs');
 const path = require('path');
+const {getAllCars}=require('../database/queries.js')
 
 
 
@@ -29,7 +30,26 @@ const showCarHandler = response => {
         response.writeHead(200, { 'Content-Type': 'text/html' });
         response.end(file);
     });
+
+   
+
 };
+
+
+
+const getCarHandler = response => {
+
+    getAllCars( (err, result) => {
+         if(err){
+             
+         response.end('sorry there is an error');}
+         else {
+         response.writeHead(200, { 'Content-Type': 'application/json' });
+         response.end((JSON.stringify(result)));}
+    })
+
+
+}
 
 
 const addCarHandler = response => {
@@ -71,5 +91,5 @@ const errorHandler = (response) => {
 
 module.exports = {
     LoginHandler,
-    UserHandler, showCarHandler, addCarHandler, PublicHandler, errorHandler
+    UserHandler, showCarHandler, addCarHandler, PublicHandler, errorHandler, getCarHandler
 }
