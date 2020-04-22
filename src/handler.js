@@ -203,7 +203,9 @@ const PublicHandler = (url, response) => {
             js: 'application/javascript',
             ico: 'image/x-icon',
             svg: 'image/svg+xml',
-            json: 'application/json'
+            json: 'application/json',
+            png : 'image/png',
+            jpg : 'image/jpg'
         };
         response.writeHead(200, { 'content-type': extensionType[extension] });
         response.end(file);
