@@ -6,11 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node src/server.js",
-<<<<<<< HEAD
     "start": "nodemon node src/server.js"
-=======
-    "start" : "nodemon node src/server.js"
->>>>>>> b55eb2ec895717f67b0c5e01188992be77a14cb5
   },
   "author": "",
   "license": "ISC",
