@@ -140,21 +140,24 @@ const postReservationHandler = (request, response) => {
 
         allTheData += chunkOfData;
     });
-    var convertedData = querystring.parse(allTheData);
 
+    request.on('end', function () {
+        console.log("all data", allTheData)
+        var convertedData = querystring.parse(allTheData);
 
-    var userid = convertedData.userid
-    var carid = convertedData.carid
-    var fromdate = convertedData.fromdate
-    var todate = convertedData.todate
-    console.log(userid, carid, fromdate, todate)
+        var userid = convertedData.userid
+        var carid = convertedData.carid
+        var fromdate = convertedData.fromdate
+        var todate = convertedData.todate
+        console.log(userid, carid, fromdate, todate)
 
-    //Issues with a-sync?
-    postReservation(userid, carid, fromdate, todate)
+        //Issues with a-sync?
+        postReservation(userid, carid, fromdate, todate)
 
-    // if (err) return serverError(err, response);
-    // response.writeHead(303, { "Location": "/getCar" }) //send back to getCar page
+        response.writeHead(303, { "Location": "/getCar" }) //send back to start
+        response.end();
 
+    })
 
 }
 
@@ -166,21 +169,25 @@ const postUserCarHandler = (request, response) => {
 
         allTheData += chunkOfData;
     });
-    var convertedData = querystring.parse(allTheData);
+    request.on('end', function () {
+        console.log("all data", allTheData)
+        var convertedData = querystring.parse(allTheData);
 
-    var make = convertedData.make
-    var model = convertedData.model
-    var year = convertedData.year
-    var color = convertedData.color
-    var seatnumber = convertedData.seatnuber
-    var rate = convertedData.rate
-    var image = convertedData.image
+        var make = convertedData.make
+        var model = convertedData.model
+        var year = convertedData.year
+        var color = convertedData.color
+        var seatnumber = convertedData.seatnuber
+        var rate = convertedData.rate
+        var image = convertedData.image
 
-    //Issues with a-sync?
-    postUserCar(make, model, year, color, seatnumber, rate, image)
+        //Issues with a-sync?
+        postUserCar(make, model, year, color, seatnumber, rate, image)
 
-    // if (err) return serverError(err, response);
-    response.writeHead(303, { "Location": "/getCar" }) //send back to add Car page
+        response.writeHead(303, { "Location": "/addCar" }) //send back to start
+        response.end();
+
+    })
 }
 
 
