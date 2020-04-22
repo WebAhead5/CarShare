@@ -27,7 +27,7 @@ reserveButton.addEventListener("click", () => {
 
 
 const setReservation = function (fromDateElement,toDateElement,userId,selectedCarId){
-    params = `from=${fromDateElement}&to=${toDateElement}&user=${userId}&car=${selectedCarId} `;
+    params = `fromdate=${fromDateElement.value}&todate=${toDateElement.value}&userid=${userId}&carid=${selectedCarId} `;
     var xhr = new XMLHttpRequest();
     //Send the proper header information along with the request
     
@@ -35,6 +35,7 @@ const setReservation = function (fromDateElement,toDateElement,userId,selectedCa
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 var data = JSON.parse(xhr.responseText);
+
                 reserveModal.style.display = "block";
                 reserveModal.classList.toggle('fade');
             }
@@ -57,8 +58,16 @@ const giveResults = function () {
                 console.log(data);
                 const cars_row = document.getElementById("cars_row");
                 for (let i = 0; i < cars_row.children.length; i++) {
-                   cars_row.children[i].getElementsByTagName('text')[0].innerHTML = data[i].make;         
-                   cars_row.children[i].getElementsByTagName('button')[0]
+                   cars_row.children[i].getElementsByTagName('img')[0].src = data[i].image;
+                   cars_row.children[i].getElementsByTagName('p')[0].innerHTML =  data[i].make
+                    + "<br /> Model: " + data[i].model
+                    + "<br /> Color: " + data[i].color
+                    + "<br /> Setes: " + data[i].seatsnumber
+                    + "<br /> Year: " + data[i].year;
+                  // card-text
+                   
+                  cars_row.children[i].getElementsByTagName('small')[0].innerHTML =  "<h6>" +data[i].rate +  " Stars </h6>";
+                  cars_row.children[i].getElementsByTagName('button')[0]
                    .addEventListener('click',()=>{
                     selectedCarId =data[i].id;
                     console.log(selectedCarId);

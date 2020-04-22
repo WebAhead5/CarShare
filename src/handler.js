@@ -136,12 +136,8 @@ const getAvailableCarsHandler = (request, response) => {
 //POST REQUEST - ADD RESERVATION
 const postReservationHandler = (request, response) => {
 
-    console.log(request);
-
-    // postReservation(userid, carid, fromdate, todate)
     var allTheData = '';
     request.on('data', function (chunkOfData) {
-
         allTheData += chunkOfData;
     });
 
@@ -208,7 +204,9 @@ const PublicHandler = (url, response) => {
             js: 'application/javascript',
             ico: 'image/x-icon',
             svg: 'image/svg+xml',
-            json: 'application/json'
+            json: 'application/json',
+            png : 'image/png',
+            jpg : 'image/jpg'
         };
         response.writeHead(200, { 'content-type': extensionType[extension] });
         response.end(file);
