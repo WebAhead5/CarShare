@@ -69,20 +69,20 @@ UI -
 			- To Date
 			- Car.
 	Add a Car page
-	Home page (User information + navigation options to add or hire a car)
+	//Home page (User information + navigation options to add or hire a car)
 
 Server -
 	routing -
 		Static:
 		-------
 		Login/Register page
-		Home page. (Include all static files (e.g. css, js, .....)).
+		//Home page. (Include all static files (e.g. css, js, .....)).
 		Reervation page
 		Adding page 
 
 		Dynamic
 		-------
-		 post add user
+		// post add user
 		 Get user information
 		 Get available cars
 		 post add car

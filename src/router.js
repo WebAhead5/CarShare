@@ -54,8 +54,9 @@ const router = (request, response) => {
 
   }else if(Url === '/createReservation'){
     createReservationHandler(carId,userId,beginDate,endDate);
-  }
-  else {
+  }else if(Url === '/?'){
+      
+  }else {
     errorHandler(response);
   }
 }
