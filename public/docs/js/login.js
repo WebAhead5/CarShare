@@ -1,3 +1,4 @@
+
 const loginButton = document.getElementById('user_log_in');
 const userNmae = document.getElementById('inputEmail');
 const password = document.getElementById('inputPassword');
@@ -17,6 +18,7 @@ const login = function (username,password) {
             if (xhr.status === 200) {
                 var data = JSON.parse(xhr.responseText);
                 Object.assign(user,data[0]);
+                window.location = "http://localhost:3000/showCar";
             }else if(xhr.status === 400){
                 
             }else{
