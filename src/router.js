@@ -33,6 +33,8 @@ const router=(request,response)=>{
         
       getCarHandler(response);
 
+    }else if(Url === '/createReservation'){
+        createReservationHandler(carId,userId,beginDate,endDate);
     }
     else 
     {
