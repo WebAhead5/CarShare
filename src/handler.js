@@ -5,7 +5,7 @@ const url = require('url')
 const querystring = require('querystring')
 
 
-
+//HTML - Index/Login Page
 const LoginHandler = response => {
     const filepath = path.join(__dirname, '..', 'public', 'index.html');
     readFile(filepath, (err, file) => {
@@ -14,6 +14,8 @@ const LoginHandler = response => {
         response.end(file);
     });
 };
+
+//HTML - User Page
 const UserHandler = response => {
     const filepath = path.join(__dirname, '..', 'public', 'user.html');
     readFile(filepath, (err, file) => {
@@ -23,92 +25,7 @@ const UserHandler = response => {
     });
 };
 
-
-const showCarHandler = response => {
-
-    const filepath = path.join(__dirname, '..', 'public', 'ShowCar.html');
-    readFile(filepath, (err, file) => {
-        if (err) return serverError(err, response);
-        response.writeHead(200, { 'Content-Type': 'text/html' });
-        response.end(file);
-    });
-
-};
-
-const passHandler = (request, response) => {   //need to get varibles from front end
-    // var username = 'Cassaundra'
-    // var password = 'BiwNM5eVU'
-
-    console.log("REQ URL:", getParamsFromRequest(request))
-
-
-    var username = getParamsFromRequest(request).name
-    var password = getParamsFromRequest(request).password
-
-    if (checkPassword(username, password, (err, result) => {
-        if (err) {
-
-            response.end('sorry there is an error');
-        }
-        else {
-            response.writeHead(200, { 'Content-Type': 'application/json' });
-            response.end((JSON.stringify(result)));
-        }
-    }));
-
-}
-
-const getCarHandler = response => {
-
-    getAllCars((err, result) => {
-        if (err) {
-
-            response.end('sorry there is an error');
-        }
-        else {
-            response.writeHead(200, { 'Content-Type': 'application/json' });
-            response.end((JSON.stringify(result)));
-        }
-    })
-
-
-}
-
-function getParamsFromRequest(request) {
-    let search = url.parse(request.url).query;
-
-    return querystring.parse(search);
-}
-
-
-
-const getUserHandler = (request, response) => {
-    // console.log("TEST1", request)
-
-
-    console.log("REQ URL:", getParamsFromRequest(request))
-
-
-    var name = getParamsFromRequest(request).name
-
-
-    console.log("NAME:", name)
-
-    getUser(name, (err, result) => {
-        if (err) {
-
-            response.end('sorry there is an error');
-        }
-        else {
-            response.writeHead(200, { 'Content-Type': 'application/json' });
-            response.end((JSON.stringify(result)));
-        }
-    })
-
-
-}
-
-
+//HTML - Add CAR page
 const addCarHandler = response => {
     const filepath = path.join(__dirname, '..', 'public', 'AddCar.html');
     readFile(filepath, (err, file) => {
@@ -118,32 +35,86 @@ const addCarHandler = response => {
     });
 };
 
+//HTML - Show Cars Page
+const showCarHandler = response => {
 
+    const filepath = path.join(__dirname, '..', 'public', 'ShowCar.html');
+    readFile(filepath, (err, file) => {
+        if (err) return serverError(err, response);
+        response.writeHead(200, { 'Content-Type': 'text/html' });
+        response.end(file);
+    });
+};
 
-const postReservationHandler = (request, response) => {
+//Func to extract values from GET REQUEST strings
+function getParamsFromRequest(request) {
+    let search = url.parse(request.url).query;
 
-    //need to get variables from front end
+    return querystring.parse(search);
+}
 
-    postReservation(userid, carid, fromdate, todate)
+//####### GET REQUESTS
+
+//GET REQUEST - CHECK PASSWORD
+const passHandler = (request, response) => {   //need to get varibles from front end
+    // var username = 'Cassaundra'
+    // var password = 'BiwNM5eVU'
+
+    var username = getParamsFromRequest(request).name
+    var password = getParamsFromRequest(request).password
+
+    checkPassword(username, password, (err, result) => {
+        if (err) {
+            response.end('sorry there is an error');
+        }
+        else {
+            response.writeHead(200, { 'Content-Type': 'application/json' });
+            response.end((JSON.stringify(result)));
+        }
+    });
 
 }
 
+//GET REQUEST - USERS INFO
+const getUserHandler = (request, response) => {
 
-const postUserCarHandler = (request, response) => {
+    var name = getParamsFromRequest(request).name
 
-    //need to get varibles from front end
+    getUser(name, (err, result) => {
+        if (err) {
+            response.end('sorry there is an error');
+        }
+        else {
+            response.writeHead(200, { 'Content-Type': 'application/json' });
+            response.end((JSON.stringify(result)));
+        }
+    })
+}
 
-    postUserCar(make, model, year, color, seatsnumber, rate, image)
+//GET REQUEST - SHOW ALL CARS
+const getCarHandler = response => {
 
-
+    getAllCars((err, result) => {
+        if (err) {
+            response.end('sorry there is an error');
+        }
+        else {
+            response.writeHead(200, { 'Content-Type': 'application/json' });
+            response.end((JSON.stringify(result)));
+        }
+    })
 }
 
 
+//GET REQUEST - AVAIABLE CARS
 const getAvailableCarsHandler = (request, response) => {
-    var fromdate = '2020-08-01'
-    var todate = '2020-10-01'
+    // var fromdate = '2020-08-01'
+    // var todate = '2020-10-01'
 
-    getAvailableCars((err, result) => {
+    var todate = getParamsFromRequest(request).todate
+    var fromdate = getParamsFromRequest(request).fromdate
+
+    getAvailableCars(todate, fromdate, (err, result) => {
         if (err) {
 
             response.end('sorry there is an error');
@@ -157,6 +128,63 @@ const getAvailableCarsHandler = (request, response) => {
 
 
 
+
+
+//####### POST REQUESTS
+
+//POST REQUEST - ADD RESERVATION
+const postReservationHandler = (request, response) => {
+
+    var allTheData = '';
+    req.on('data', function (chunkOfData) {
+
+        allTheData += chunkOfData;
+    });
+    var convertedData = querystring.parse(allTheData);
+    res.writeHead(303, { "Location": "/getCar" }) //send back to getCar page
+
+    var userid = convertedData.userid
+    var carid = convertedData.carid
+    var fromdate = convertedData.fromdate
+    var todate = convertedData.todate
+
+    postReservation(userid, carid, fromdate, todate)
+
+    if (err) return serverError(err, response);
+    response.writeHead(200, { 'Content-Type': 'text/plain' });
+    response.end("Reservation Added OK")
+
+}
+
+//POST REQUEST - ADD CAR
+const postUserCarHandler = (request, response) => {
+
+    var allTheData = '';
+    req.on('data', function (chunkOfData) {
+
+        allTheData += chunkOfData;
+    });
+    var convertedData = querystring.parse(allTheData);
+    res.writeHead(303, { "Location": "/addCar" }) //send back to add car page
+
+    var make = convertedData.make
+    var model = convertedData.model
+    var year = convertedData.year
+    var color = convertedData.color
+    var seatnumber = convertedData.seatnuber
+    var rate = convertedData.rate
+    var image = convertedData.image
+
+
+    postUserCar(make, model, year, color, seatnumber, rate, image)
+
+    if (err) return serverError(err, response);
+    response.writeHead(200, { 'Content-Type': 'text/plain' });
+    response.end("Car Added OK")
+}
+
+
+//Public Handler
 const PublicHandler = (url, response) => {
     const filepath = path.join(__dirname, '..', url);
     readFile(filepath, (err, file) => {
@@ -173,15 +201,11 @@ const PublicHandler = (url, response) => {
     });
 };
 
-
-
+//ERROR Handler
 const errorHandler = (response) => {
     response.writeHead(404, { 'content-type': 'text/html' });
     response.end('<h1>404 Page Requested Cannot be Found</h1>');
 };
-
-
-
 
 
 module.exports = {
