@@ -124,7 +124,9 @@ const postReservationHandler = (request, response) => {
 
     //need to get variables from front end
 
-    postReservation(userid, carid, fromdate, todate)
+    console.log(request);
+
+   // postReservation(userid, carid, fromdate, todate)
 
 }
 

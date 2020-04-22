@@ -22,29 +22,30 @@ reserveButton.addEventListener("click", () => {
     const endDate = toDateElement.value;
     const userId = 7;
     const carId = selectedCarId;
-    setReservation();
+    setReservation(fromDateElement,toDateElement,userId,selectedCarId);
 });
 
 
-const setReservation = function (){
-
-    // var xhr = new XMLHttpRequest();
-    // xhr.onreadystatechange = function () {
-    //     if (xhr.readyState === 4) {
-    //         if (xhr.status === 200) {
-    //             var data = JSON.parse(xhr.responseText);
-    //         }
-    //         else {
-    //             console.error(xhr.responseText);
-    //         }
-    //     }
-    // }
-    // xhr.open('POST', '/createReservation', true);
-    // xhr.send();
-
-   
-   reserveModal.style.display = "block";
-   reserveModal.classList.toggle('fade');
+const setReservation = function (fromDateElement,toDateElement,userId,selectedCarId){
+    params = `from=${fromDateElement}&to=${toDateElement}&user=${userId}&car=${selectedCarId} `;
+    var xhr = new XMLHttpRequest();
+    //Send the proper header information along with the request
+    
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                reserveModal.style.display = "block";
+                reserveModal.classList.toggle('fade');
+            }
+            else {
+                console.error(xhr.responseText);
+            }
+        }
+    }
+    xhr.open('POST', '/postRes', true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send(params);
 }
 
 const giveResults = function () {

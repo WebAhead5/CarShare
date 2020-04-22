@@ -43,7 +43,7 @@ const router = (request, response) => {
     postUserCarHandler(request, response);
 
   }
-  else if (Url === '/postRes' && request.method === 'POST') {
+  else if (Url.includes('/postRes') && request.method === 'POST') {
 
     postReservationHandler(request, response);
 
@@ -55,7 +55,7 @@ const router = (request, response) => {
   }else if(Url === '/createReservation'){
     createReservationHandler(carId,userId,beginDate,endDate);
   }else if(Url === '/?'){
-      
+
   }else {
     errorHandler(response);
   }
