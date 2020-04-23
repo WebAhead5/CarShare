@@ -16,6 +16,7 @@ closeButton.addEventListener('click', ()=> {
 
 loginButton.addEventListener('click',() => {
     event.preventDefault();
+    showLoginSpinner(true);
     login(userNmae.value,password.value);
 })
 
@@ -26,6 +27,7 @@ const login = function (username,password) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
+            showLoginSpinner(false);
             if (xhr.status === 200) {
                 var data = JSON.parse(xhr.responseText);
                 Object.assign(user,data[0]);
@@ -48,3 +50,14 @@ const login = function (username,password) {
     xhr.open('GET', '/passCheck' + "?" + params, true);
     xhr.send();
 }
+
+function showLoginSpinner(show) {
+    const loginSpinner = document.getElementById("spinner");
+    if (show) {
+        loginSpinner.style.display = "block";
+    } else {
+        loginSpinner.style.display = "none";
+    }
+}
+
+showLoginSpinner(false);

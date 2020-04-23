@@ -54,12 +54,14 @@ reserveButton.addEventListener("click", () => {
 
 
 const setReservation = function (startDate,endDate,userId,selectedCarId){
+    showReserveSpinner(true);
     params = `fromdate=${startDate}&todate=${endDate}&userid=${userId}&carid=${selectedCarId} `;
     var xhr = new XMLHttpRequest();
     //Send the proper header information along with the request
     
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
+            showReserveSpinner(false);
             if (xhr.status === 200) {
                 var data = JSON.parse(xhr.responseText);
                 message.innerHTML = "The reservation was added successfully";
@@ -76,7 +78,7 @@ const setReservation = function (startDate,endDate,userId,selectedCarId){
     xhr.send(params);
 }
 
-const giveResults = function () {
+const getAllCars = function () {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -122,11 +124,12 @@ function hideGallery(hide) {
 }
 
 const getAvailableCars = function (startDate,endDate) {
-
+    showSearchSpinner(true);
     params = `todate=${startDate}&fromdate=${endDate}`;
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
+            showSearchSpinner(false);
             if (xhr.status === 200) {
                 var data = JSON.parse(xhr.responseText);
                 console.log(data);
@@ -159,14 +162,31 @@ const getAvailableCars = function (startDate,endDate) {
     xhr.send();
 }
 
+function showSearchSpinner(show) {
+    const searchSpinner = document.getElementById("searchspinner");
+    if (show) {
+        searchSpinner.style.display = "block";
+    } else {
+        searchSpinner.style.display = "none";
+    }
+}
+
+showSearchSpinner(false);
+
+function showReserveSpinner(show) {
+    const reserveSpinner = document.getElementById("reservespinner");
+    if (show) {
+        reserveSpinner.style.display = "block";
+    } else {
+        reserveSpinner.style.display = "none";
+    }
+}
+
+showReserveSpinner(false);
+
 var queryString = decodeURIComponent(window.location.search);
 queryString = queryString.substring(1);
 var queries = queryString.split("&");
 userId = queries[0].split("=")[1];
 console.log("User id = " + userId);
-// for (var i = 0; i < queries.length; i++)
-// {
-//   //  console.log(queries[i]);
-//   //document.write(queries[i] + "<br>");
-// }
 hideGallery(true);
