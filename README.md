@@ -8,7 +8,7 @@ A project for sharing cars :oncoming_automobile:	:seedling:
 - Server Design
 
 Login Credentials (for code review):
- - Username: Lexis
+ - Username: lbennell7@alexa.com
 - Password: XtWurJnVfhw
 
 ## User Story
