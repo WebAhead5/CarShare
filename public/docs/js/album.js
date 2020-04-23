@@ -6,11 +6,13 @@ const reserveButton = document.getElementById("reserve_button");
 var selectedCarId;
 
 const reserveModal = document.getElementById("reserveModal");
+var message = reserveModal.getElementsByTagName('p')[0];
 
 const closeButton = document.getElementById("close_modal");
 closeButton.addEventListener('click', ()=> {
  reserveModal.style.display = "none";
  reserveModal.classList.toggle('fade');
+
 })
 
 searchButton.addEventListener("click", () => {
@@ -22,7 +24,13 @@ reserveButton.addEventListener("click", () => {
     const endDate = toDateElement.value;
     const userId = 7;
     const carId = selectedCarId;
-    setReservation(fromDateElement,toDateElement,userId,selectedCarId);
+    if(carId === undefined){
+        message.innerHTML = "Plesase select a car";
+        reserveModal.style.display = "block";
+        reserveModal.classList.toggle('fade');
+    }else{
+        setReservation(fromDateElement,toDateElement,userId,selectedCarId);
+    }
 });
 
 
@@ -35,7 +43,7 @@ const setReservation = function (fromDateElement,toDateElement,userId,selectedCa
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 var data = JSON.parse(xhr.responseText);
-
+                message.innerHTML = "The reservation was added successfully";
                 reserveModal.style.display = "block";
                 reserveModal.classList.toggle('fade');
             }
