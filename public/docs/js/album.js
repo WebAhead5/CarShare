@@ -24,18 +24,27 @@ reserveButton.addEventListener("click", () => {
     const endDate = toDateElement.value;
     const userId = 7;
     const carId = selectedCarId;
-    if(carId === undefined){
+    console.log("carrr" + startDate,endDate);
+    if(startDate.length <= 0){
+        message.innerHTML = "Plesase select a start date";
+        reserveModal.style.display = "block";
+        reserveModal.classList.toggle('fade');
+    }else if(endDate.length <=0 ){
+        message.innerHTML = "Plesase select to date";
+        reserveModal.style.display = "block";
+        reserveModal.classList.toggle('fade');
+    }else if(carId === undefined){
         message.innerHTML = "Plesase select a car";
         reserveModal.style.display = "block";
         reserveModal.classList.toggle('fade');
     }else{
-        setReservation(fromDateElement,toDateElement,userId,selectedCarId);
+        setReservation(startDate,endDate,userId,selectedCarId);
     }
 });
 
 
 const setReservation = function (fromDateElement,toDateElement,userId,selectedCarId){
-    params = `fromdate=${fromDateElement.value}&todate=${toDateElement.value}&userid=${userId}&carid=${selectedCarId} `;
+    params = `fromdate=${fromDateElement}&todate=${toDateElement}&userid=${userId}&carid=${selectedCarId} `;
     var xhr = new XMLHttpRequest();
     //Send the proper header information along with the request
     
