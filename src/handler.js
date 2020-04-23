@@ -62,10 +62,10 @@ const getCarHandler = response => {
 
     getAllCars((err, result) => {
         if (err) {
-
             response.end('sorry there is an error');
         }
         else {
+
             response.writeHead(200, { 'Content-Type': 'application/json' });
             response.end((JSON.stringify(result)));
         }
@@ -155,7 +155,6 @@ const getAvailableCarsHandler = (request, response) => {
 
     getAvailableCars((err, result) => {
         if (err) {
-
             response.end('sorry there is an error');
         }
         else {
@@ -172,7 +171,7 @@ const PublicHandler = (url, response) => {
     readFile(filepath, (err, file) => {
         if (err) return serverError(err, response);
         const extension = url.split('.')[1];
-        console.log(extension);
+       // console.log(extension);
         const extensionType = {
             html: 'text/html',
             css: 'text/css',
