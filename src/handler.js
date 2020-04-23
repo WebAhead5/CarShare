@@ -85,6 +85,7 @@ const getUserHandler = (request, response) => {
             response.end('sorry there is an error');
         }
         else {
+
             response.writeHead(200, { 'Content-Type': 'application/json' });
             response.end((JSON.stringify(result)));
         }
@@ -135,6 +136,11 @@ const getAvailableCarsHandler = (request, response) => {
 
 //POST REQUEST - ADD RESERVATION
 const postReservationHandler = (request, response) => {
+    var userid = getParamsFromRequest(request).userid;
+    var carid = getParamsFromRequest(request).carid;
+    var fromdate = getParamsFromRequest(request).fromdate;
+    var carid = getParamsFromRequest(request).todate;
+
 
     var allTheData = '';
     request.on('data', function (chunkOfData) {
