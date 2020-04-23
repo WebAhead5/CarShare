@@ -112,7 +112,7 @@ Dynamic
   ## Conclusion
   - BIG project, SMALL team :disappointed_relieved:
   - We also put each team member on their weakest area! :frog:
-  - So sadly no time for testing, hosting & security :unlock:
+  - So sadly we only had limited time for testing & security :unlock:
   - Having your own data base is a fast and useful way to store, amend & access data :file_cabinet:
   - Designing your database correctly at the start is important! :twisted_rightwards_arrows:
   
