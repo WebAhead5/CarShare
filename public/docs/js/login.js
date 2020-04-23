@@ -4,6 +4,16 @@ const userNmae = document.getElementById('inputEmail');
 const password = document.getElementById('inputPassword');
 var user ={};
 
+const reserveModal = document.getElementById("reserveModal");
+var message = reserveModal.getElementsByTagName('p')[0];
+
+const closeButton = document.getElementById("close_modal");
+closeButton.addEventListener('click', ()=> {
+ reserveModal.style.display = "none";
+ reserveModal.classList.toggle('fade');
+
+})
+
 loginButton.addEventListener('click',() => {
     event.preventDefault();
     login(userNmae.value,password.value);
@@ -12,13 +22,20 @@ loginButton.addEventListener('click',() => {
 
 const login = function (username,password) {
     var params = "name=" + username + "&" + "password=" +password;
+    console.log(params);
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 var data = JSON.parse(xhr.responseText);
-                Object.assign(user,data[0]);
-                window.location = "./public/album.html";
+                if(data.id != undefined){
+                    Object.assign(user,data[0]);
+                    window.location = "./public/album.html";
+                }else{
+                    message.innerHTML = "User name or password not exisit, Please check again.To register we don't have option now, talk to Farid/Jack/Amir and maybe the will add you to the database";
+                    reserveModal.style.display = "block";
+                    reserveModal.classList.toggle('fade');
+                }
             }else if(xhr.status === 400){
                 
             }else{
