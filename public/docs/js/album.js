@@ -24,7 +24,6 @@ reserveButton.addEventListener("click", () => {
     const endDate = toDateElement.value;
     const userId = 7;
     const carId = selectedCarId;
-    console.log("carrr" + startDate,endDate);
     if(startDate.length <= 0){
         message.innerHTML = "Plesase select a start date";
         reserveModal.style.display = "block";
@@ -81,7 +80,6 @@ const giveResults = function () {
                     + "<br /> Color: " + data[i].color
                     + "<br /> Setes: " + data[i].seatsnumber
                     + "<br /> Year: " + data[i].year;
-                  // card-text
                    
                   cars_row.children[i].getElementsByTagName('small')[0].innerHTML =  "<h6>" +data[i].rate +  " Stars </h6>";
                   cars_row.children[i].getElementsByTagName('button')[0]
@@ -89,8 +87,10 @@ const giveResults = function () {
                     selectedCarId =data[i].id;
                     console.log(selectedCarId);
                    });
-
                 }
+                hideGallery(false);
+                var gallery = document.getElementById('Lorem_Ipsum').offsetTop; //Getting Y of target element
+                window.scrollTo(0, gallery)
             }
             else {
                 console.error(xhr.responseText);
@@ -101,3 +101,14 @@ const giveResults = function () {
     xhr.send();
 }
 
+
+function hideGallery(hide) {
+    var x = document.getElementById("Lorem_Ipsum");
+    if (hide) {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+}
+
+hideGallery(true);
