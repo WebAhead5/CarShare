@@ -18,11 +18,11 @@ CREATE TABLE cars (
 id SERIAL PRIMARY KEY ,
 make VARCHAR (20) NOT NULL,
 model VARCHAR (20) NOT NULL,
-year VARCHAR (20) NOT NULL,
+year INTEGER NOT NULL,
 color VARCHAR (50)  NOT NULL,
 seatsnumber VARCHAR (15) NOT NULL,
 rate VARCHAR (15) NOT NULL,
-image VARCHAR (15000) NOT NULL
+image VARCHAR (500) NOT NULL
 );
 
 CREATE TABLE reservations ( 
@@ -49,11 +49,6 @@ insert into cars (make, model, year, color, seatsnumber, rate, image) values ('A
 insert into cars (make, model, year, color, seatsnumber, rate, image) values ('Mitsubishi', 'Outlander', 2005, 'Maroon', 4, 4, 'https://lh3.googleusercontent.com/proxy/fB06D_RNJbxdUj-hu3HT3uDaRAggL5kb3TENi-KBhfillAgqWW-vD27n8z7J6TOziEDo579bJEYa9kQDGfSLBIz8dCL-_vcBpKVZ0BO8AIHIoMbQblUZBJkJFqhdkaMqhg');
 insert into cars (make, model, year, color, seatsnumber, rate, image) values ('BMW', '7 Series', 1995, 'Aquamarine', 2, 9, 'https://i.pinimg.com/originals/29/63/6e/29636ec142974a28dce83808473c9012.jpg');
 insert into cars (make, model, year, color, seatsnumber, rate, image) values ('Ford', 'Tempo', 1991, 'Violet', 5, 10, 'https://cloud.leparking.fr/2018/11/08/04/48/ford-scorpio-ford-scorpio-1995-violet_6533340016.jpg')
-
-
-
-
-
 insert into cars (make, model, year, color, seatsnumber, rate, image) values ('Mazda', 'B-Series', 1998, 'Red', 3, 1, 'https://lh3.googleusercontent.com/proxy/vuvXfE7DKgcmFeEuqFsSLnwIN9IVvrh4jUm8i9WXTzEv7DAPl6T1Avqlv9f6qBHZNY-bNeGujVBcCyymXtQrn_boA-XgO3K-Y05kVY8');
 insert into cars (make, model, year, color, seatsnumber, rate, image) values ('Mazda', 'RX-7', 1988, 'Green', 2, 4, 'https://pict1.reezocar.com/images/360/autotrader.nl/RZCATTNL3064E59A41E2/MAZDA-RX-7-00.jpg');
 insert into cars (make, model, year, color, seatsnumber, rate, image) values ('GMC', '2500', 1993, 'Turquoise', 2, 3, 'https://i.ytimg.com/vi/xnJT26NmvYQ/hqdefault.jpg');
