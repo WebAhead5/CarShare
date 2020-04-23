@@ -18,7 +18,7 @@ const login = function (username,password) {
             if (xhr.status === 200) {
                 var data = JSON.parse(xhr.responseText);
                 Object.assign(user,data[0]);
-                window.location = "http://localhost:3000/showCar";
+                window.location = "./public/album.html";
             }else if(xhr.status === 400){
                 
             }else{
