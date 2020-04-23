@@ -69,13 +69,13 @@ insert into cars (make, model, year, color, seatsnumber, rate, image) values ('M
 
 insert into reservations (userid, carid, fromdate, todate) values (3, 9, '11/5/2020', '12/5/2020');
 insert into reservations (userid, carid, fromdate, todate) values (10, 5, '1/4/2021', '2/4/2021');
-insert into reservations (userid, carid, fromdate, todate) values (9, 17, '4/21/2021', '5/5/2021');
+insert into reservations (userid, carid, fromdate, todate) values (9, 17, '4/10/2021', '5/5/2021');
 insert into reservations (userid, carid, fromdate, todate) values (8, 3, '5/6/2020', '6/8/2020');
-insert into reservations (userid, carid, fromdate, todate) values (2, 18, '5/16/2020', '6/16/2020');
-insert into reservations (userid, carid, fromdate, todate) values (2, 16, '4/27/2020', '5/19/2020');
-insert into reservations (userid, carid, fromdate, todate) values (4, 11, '7/18/2020', '10/29/2020');
-insert into reservations (userid, carid, fromdate, todate) values (9, 7, '5/17/2020', '6/8/2020');
-insert into reservations (userid, carid, fromdate, todate) values (2, 7, '9/07/2020', '9/23/2020');
-insert into reservations (userid, carid, fromdate, todate) values (4, 14, '8/15/2020', '9/1/2020');
+insert into reservations (userid, carid, fromdate, todate) values (2, 18, '5/01/2020', '6/10/2020');
+insert into reservations (userid, carid, fromdate, todate) values (2, 16, '4/04/2020', '5/11/2020');
+insert into reservations (userid, carid, fromdate, todate) values (4, 11, '7/09/2020', '10/10/2020');
+insert into reservations (userid, carid, fromdate, todate) values (9, 7, '5/06/2020', '6/8/2020');
+insert into reservations (userid, carid, fromdate, todate) values (2, 7, '9/07/2020', '9/09/2020');
+insert into reservations (userid, carid, fromdate, todate) values (4, 14, '8/10/2020', '9/1/2020');
 
 COMMIT;
