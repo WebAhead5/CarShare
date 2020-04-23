@@ -69,7 +69,10 @@ const setReservation = function (startDate,endDate,userId,selectedCarId){
                 reserveModal.classList.toggle('fade');
             }
             else {
-                console.error(xhr.responseText);
+                message.innerHTML = "The reservation was not added";
+                reserveModal.style.display = "block";
+                reserveModal.classList.toggle('fade');
+               
             }
         }
     }

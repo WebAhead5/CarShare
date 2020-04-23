@@ -152,10 +152,18 @@ const postReservationHandler = (request, response) => {
         console.log(userid, carid, fromdate, todate)
 
         //Issues with a-sync?
-        postReservation(userid, carid, fromdate, todate)
+        postReservation(userid, carid, fromdate, todate,(error,result)=>{
+            if(error){
+                response.writeHead(500, {"Content-Type": "text/html"}); //send back to start
+                response.end("Reservation does not added");
+            }else{
+                response.writeHead(303, { "Location": "/getCar" }) //send back to start
+                response.end();
+            }
 
-        response.writeHead(303, { "Location": "/getCar" }) //send back to start
-        response.end();
+        })
+
+
 
     })
 
