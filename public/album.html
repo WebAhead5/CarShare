@@ -10,6 +10,7 @@
     <title>Album example · Bootstrap</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
    <!-- Bootstrap core CSS -->
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -168,8 +169,8 @@ aWZ5ADIwMjAtMDQtMjFUMTc6MDM6NTcrMDM6MDB6RBHTAAAAAElFTkSuQmCC" />
       <p class="d-flex justify-content-between align-items-center"><label for="end_date">To Date:</label>
         <input type="date" id="end_date" name="end_date"></p>  
       <p>
-        <a id= "search_button" href="#Lorem_Ipsum" class="btn btn-primary my-2">Search for available cars</a>
-        <a id= "reserve_button" href="#" class="btn btn-secondary my-2">Resarve the selected car</a>
+        <a id= "search_button" href="#Lorem_Ipsum" class="btn btn-primary my-2"><i id="searchspinner" class="fa fa-spinner fa-spin"></i>Search for available cars</a>
+        <a id= "reserve_button" href="#" class="btn btn-secondary my-2"><i id="reservespinner" class="fa fa-spinner fa-spin"></i>Reserve the selected car</a>
       </p>
     </div>
   </section>
@@ -180,7 +181,6 @@ aWZ5ADIwMjAtMDQtMjFUMTc6MDM6NTcrMDM6MDB6RBHTAAAAAElFTkSuQmCC" />
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
             <img class="bd-placeholder-img card-img-top" src="/public/docs/4_4/assets/img/favicons/favicon-16x16.png" width="100%" height="225">
-            <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><img x="50%" y="50%" fill="#eceeef" dy=".3em" src="/public/docs/4_4/assets/img/favicons/android-chrome-192x192.png"></svg> -->
             <div class="card-body">
               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
@@ -317,7 +317,7 @@ aWZ5ADIwMjAtMDQtMjFUMTc6MDM6NTcrMDM6MDB6RBHTAAAAAElFTkSuQmCC" />
     <p class="float-right">
       <a href="#">Back to top</a>
     </p>
-    <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+    <p>We used Album example from &copy; Bootstrap with the changes we needed</p>
     <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.4/getting-started/introduction/">getting started guide</a>.</p>
   </div>
 </footer>
