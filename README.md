@@ -52,7 +52,7 @@ Search for Car:
 
 Schema:
 ```
-Table 1 - Users
+Table 1: Users
 	- id
 	- first name
 	- last name
@@ -61,7 +61,7 @@ Table 1 - Users
 	- password
 	- image
 	-------------------------
-Table 2 - Cars
+Table 2: Cars
 	- id
 	- type
 	- model
@@ -71,7 +71,7 @@ Table 2 - Cars
 	- raite
 	- image
 	-------------------------
-Table 3 - Reservations (Pivot table)
+Table 3: Reservations (Pivot table)
 	- id
 	- user_id
 	- car_id
