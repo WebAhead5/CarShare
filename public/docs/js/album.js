@@ -4,6 +4,7 @@ const toDateElement = document.getElementById("end_date");
 const searchButton = document.getElementById("search_button");
 const reserveButton = document.getElementById("reserve_button");
 var selectedCarId;
+var userId;
 
 const reserveModal = document.getElementById("reserveModal");
 var message = reserveModal.getElementsByTagName('p')[0];
@@ -33,7 +34,6 @@ searchButton.addEventListener("click", () => {
 reserveButton.addEventListener("click", () => {
     const startDate = fromDateElement.value;
     const endDate = toDateElement.value;
-    const userId = 7;
     const carId = selectedCarId;
     if(startDate.length <= 0){
         message.innerHTML = "Plesase select a start date";
@@ -159,5 +159,14 @@ const getAvailableCars = function (startDate,endDate) {
     xhr.send();
 }
 
-
+var queryString = decodeURIComponent(window.location.search);
+queryString = queryString.substring(1);
+var queries = queryString.split("&");
+userId = queries[0].split("=")[1];
+console.log("User id = " + userId);
+// for (var i = 0; i < queries.length; i++)
+// {
+//   //  console.log(queries[i]);
+//   //document.write(queries[i] + "<br>");
+// }
 hideGallery(true);

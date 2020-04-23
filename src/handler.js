@@ -193,10 +193,11 @@ const postUserCarHandler = (request, response) => {
 
 //Public Handler
 const PublicHandler = (url, response) => {
-    const filepath = path.join(__dirname, '..', url);
+    const filteredUrl = url.split("?")[0];
+    const filepath = path.join(__dirname, '..', filteredUrl);
     readFile(filepath, (err, file) => {
         if (err) return serverError(err, response);
-        const extension = url.split('.')[1];
+        const extension = filteredUrl.split('.')[1];
         console.log(extension);
         const extensionType = {
             html: 'text/html',
