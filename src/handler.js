@@ -155,7 +155,6 @@ const postReservationHandler = (request, response) => {
         var carid = convertedData.carid
         var fromdate = convertedData.fromdate
         var todate = convertedData.todate
-        console.log(userid, carid, fromdate, todate)
 
         //Issues with a-sync?
         postReservation(userid, carid, fromdate, todate)
@@ -176,7 +175,7 @@ const postUserCarHandler = (request, response) => {
         allTheData += chunkOfData;
     });
     request.on('end', function () {
-        console.log("all data", allTheData)
+
         var convertedData = querystring.parse(allTheData);
 
         var make = convertedData.make
@@ -212,8 +211,8 @@ const PublicHandler = (url, response) => {
             ico: 'image/x-icon',
             svg: 'image/svg+xml',
             json: 'application/json',
-            png : 'image/png',
-            jpg : 'image/jpg'
+            png: 'image/png',
+            jpg: 'image/jpg'
         };
         response.writeHead(200, { 'content-type': extensionType[extension] });
         response.end(file);

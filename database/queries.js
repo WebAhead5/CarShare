@@ -32,14 +32,12 @@ function getUser(UserName, cb) {
         if (err) cb(err)
         else cb(null, res.rows);
     })
-
 }
 
 //POST
 
 //Insert new car to database
 function postUserCar(make, model, year, color, seatsnumber, rate, image) {
-    console
     database.query(`insert into cars (make, model, year, color, seatsnumber, rate, image) values ('${make}', '${model}', ${year},'${color}',${seatsnumber},${rate},'${image}');`)
 }
 
