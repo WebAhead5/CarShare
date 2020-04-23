@@ -7,6 +7,10 @@ A project for sharing cars :oncoming_automobile:	:seedling:
 - Database Design
 - Server Design
 
+Login Credentials (for code review):
+ - Username: Lexis
+- Password: XtWurJnVfhw
+
 ## User Story
 
  As a member of WebAhead who has a car I would like to share...
