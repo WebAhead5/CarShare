@@ -138,7 +138,6 @@ const postReservationHandler = (request, response) => {
 
     var allTheData = '';
     request.on('data', function (chunkOfData) {
-        console.log(1)
         allTheData += chunkOfData;
     });
 
