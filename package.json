@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": " tape src/test/router.js | tap-spec",
-    "server": "node src/server.js",
-    "start": "nodemon node src/server.js"
+    "server": "nodemon node src/server.js",
+    "start": "node src/server.js"
+
   },
   "author": "",
   "license": "ISC",
