@@ -16,7 +16,18 @@ closeButton.addEventListener('click', ()=> {
 })
 
 searchButton.addEventListener("click", () => {
-    giveResults();
+    const startDate = fromDateElement.value;
+    const endDate = toDateElement.value;
+    if(startDate.length <= 0){
+        message.innerHTML = "Plesase select a start date";
+        reserveModal.style.display = "block";
+        reserveModal.classList.toggle('fade');
+    }else if(endDate.length <=0 ){
+        message.innerHTML = "Plesase select to date";
+        reserveModal.style.display = "block";
+        reserveModal.classList.toggle('fade');
+    }
+   getAvailableCars(startDate,endDate);
 });
 
 reserveButton.addEventListener("click", () => {
@@ -42,8 +53,8 @@ reserveButton.addEventListener("click", () => {
 });
 
 
-const setReservation = function (fromDateElement,toDateElement,userId,selectedCarId){
-    params = `fromdate=${fromDateElement}&todate=${toDateElement}&userid=${userId}&carid=${selectedCarId} `;
+const setReservation = function (startDate,endDate,userId,selectedCarId){
+    params = `fromdate=${startDate}&todate=${endDate}&userid=${userId}&carid=${selectedCarId} `;
     var xhr = new XMLHttpRequest();
     //Send the proper header information along with the request
     
@@ -101,7 +112,6 @@ const giveResults = function () {
     xhr.send();
 }
 
-
 function hideGallery(hide) {
     var x = document.getElementById("Lorem_Ipsum");
     if (hide) {
@@ -110,5 +120,44 @@ function hideGallery(hide) {
         x.style.display = "block";
     }
 }
+
+const getAvailableCars = function (startDate,endDate) {
+
+    params = `todate=${startDate}&fromdate=${endDate}`;
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                console.log(data);
+                const cars_row = document.getElementById("cars_row");
+                for (let i = 0; i < cars_row.children.length; i++) {
+                   cars_row.children[i].getElementsByTagName('img')[0].src = data[i].image;
+                   cars_row.children[i].getElementsByTagName('p')[0].innerHTML =  data[i].make
+                    + "<br /> Model: " + data[i].model
+                    + "<br /> Color: " + data[i].color
+                    + "<br /> Setes: " + data[i].seatsnumber
+                    + "<br /> Year: " + data[i].year;
+                   
+                  cars_row.children[i].getElementsByTagName('small')[0].innerHTML =  "<h6>" +data[i].rate +  " Stars </h6>";
+                  cars_row.children[i].getElementsByTagName('button')[0]
+                   .addEventListener('click',()=>{
+                    selectedCarId =data[i].id;
+                    console.log(selectedCarId);
+                   });
+                }
+                hideGallery(false);
+                var gallery = document.getElementById('Lorem_Ipsum').offsetTop; //Getting Y of target element
+                window.scrollTo(0, gallery)
+            }
+            else {
+                console.error(xhr.responseText);
+            }
+        }
+    }
+    xhr.open('GET', '/getAvailableCars' +"?" + params, true);
+    xhr.send();
+}
+
 
 hideGallery(true);
