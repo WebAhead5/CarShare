@@ -30,6 +30,7 @@ const router = (request, response) => {
     passHandler(request, response);
   }//POST REQ
   else if (Url.includes('/postCar') && request.method === 'POST') {
+    console.log("POST CAR ROUTE HIT")
     postUserCarHandler(request, response);
   }//POST REQ
   else if (Url.includes('/postRes') && request.method === 'POST') {
